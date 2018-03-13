@@ -1,13 +1,32 @@
-const boxes = []
-for (let i = 1; i <= 15; i++) {
-    let content = ''
-    if (i % 3 === 0) content += 'Fizz'
-    if (i % 5 === 0) content += 'Buzz'
-    if (content === '') content = String(i)
-    else content = React.createElement('strong', {}, content)
-    boxes.push(
-        React.createElement('div', { style: getBoxStyle(i - 1), key: i }, content)
-    )
-}
+import { getBoxStyle } from './shapes.js'
 
-React.createElement('div', { style: getBoxStyle(i - 1), key: i }, React.createElement('strong', ))
+const boxes = [];
+
+    for (let i = 1; i < 21; i++) {
+        if (i % 3 === 0) {
+            boxes.push (
+                React.createElement('div', { style: getBoxStyle(i -1), key: i }, i+1,
+                (React.createElement('strong', {}, 'Fizz')))
+            );
+        } else if (i % 5 === 0) {
+            boxes.push (
+            React.createElement('div', { style: getBoxStyle(i -1), key: i }, i+1,
+                (React.createElement('strong', {}, 'Buzz')))
+            );
+        } else if (i % (3 && 5) === 0) {
+            boxes.push (
+            React.createElement('div', { style: getBoxStyle(i -1), key: i }, i+1,
+                (React.createElement('strong', {}, 'FizzBuzz')))
+            );
+        } else {
+            boxes.push (
+            React.createElement('div', { style: getBoxStyle(i -1), key: i }, i+1,
+                (React.createElement('strong', {}, i)))
+            );
+        }
+    }
+
+ReactDOM.render(
+    React.createElement('div', {}, boxes),
+    document.getElementById('app')
+);
